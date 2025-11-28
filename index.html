@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ToxicSkill Booking</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar" role="banner">
+    <div class="brand">
+      <h1 class="logo">ToxicSkill</h1>
+      <div class="subtitle">Booking System</div>
+    </div>
+    <div class="controls" role="navigation" aria-label="Фильтры и действия">
+      <div class="chips" role="group" aria-label="Фильтры ПК">
+        <button id="filterAll" class="chip active">Все</button>
+        <button id="filterFree" class="chip">Свободные</button>
+        <button id="filterVIP" class="chip vip">VIP</button>
+      </div>
+      <div class="actions">
+        <input id="search" class="search" placeholder="Поиск по имени или номеру" aria-label="Поиск" />
+        <button id="authBtn" class="chip">Войти</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="pcGrid" class="grid" aria-live="polite" aria-busy="true">
+      <!-- skeletons injected by JS -->
+    </section>
+  </main>
+
+  <!-- Bottom sheet -->
+  <div id="sheet" class="sheet hidden" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="sheet__backdrop" id="sheetBackdrop"></div>
+    <div class="sheet__panel" role="document" aria-labelledby="sheetTitle">
+      <div class="sheet__handle" aria-hidden="true"></div>
+      <h3 id="sheetTitle" class="sheet__title">Бронирование</h3>
+
+      <div class="sheet__body">
+        <div class="pcPreview" id="pcPreview">
+          <div class="pcPreview__img" id="pcPreviewImg" aria-hidden="true"></div>
+          <div class="pcPreview__meta">
+            <div id="pcPreviewName" class="pcPreview__name"></div>
+            <div id="pcPreviewBadges" class="pcPreview__badges"></div>
+          </div>
+        </div>
+
+        <div class="formRow">
+          <input type="date" id="date" />
+          <input type="time" id="time" />
+        </div>
+
+        <div class="quickSlots" aria-hidden="false">
+          <button class="btn btn--ghost ripple" data-add="1">+1ч</button>
+          <button class="btn btn--ghost ripple" data-add="2">+2ч</button>
+          <button class="btn btn--ghost ripple" data-add="3">+3ч</button>
+        </div>
+
+        <div class="sheet__actions">
+          <button id="confirmBtn" class="btn btn--primary ripple">Подтвердить</button>
+          <button id="cancelBtn" class="btn btn--ghost ripple">Отмена</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <!-- Card template -->
+  <template id="cardTpl">
+    <article class="card" tabindex="0" role="button">
+      <div class="card__img skeleton"></div>
+      <div class="card__body">
+        <div class="card__title skeleton-text"></div>
+        <div class="card__row">
+          <div class="badges">
+            <span class="badge badge--vip">VIP</span>
+            <span class="badge badge--status">Свободен</span>
+          </div>
+          <div class="timeLeft" aria-hidden="true"></div>
+        </div>
+      </div>
+      <div class="card__footer">
+        <button class="btn btn--small btn--primary ripple bookBtn">Бронировать</button>
+      </div>
+    </article>
+  </template>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
